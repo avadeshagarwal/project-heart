@@ -12,6 +12,18 @@ import { TimelineSettings } from "@/components/sections/timeline/timeline-settin
 import { CountdownSection } from "@/components/sections/countdown/countdown-section"
 import { CountdownSettings } from "@/components/sections/countdown/countdown-settings"
 
+import { GallerySection } from "@/components/sections/gallery/gallery-section"
+import { GallerySettings } from "@/components/sections/gallery/gallery-settings"
+
+import { VideoSection } from "@/components/sections/video/video-section"
+import { VideoSettings } from "@/components/sections/video/video-settings"
+
+import { MusicSection } from "@/components/sections/music/music-section"
+import { MusicSettings } from "@/components/sections/music/music-settings"
+
+import { VoiceSection } from "@/components/sections/voice/voice-section"
+import { VoiceSettings } from "@/components/sections/voice/voice-settings"
+
 export interface SectionPlugin {
   type: SectionType
   label: string
@@ -71,7 +83,9 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     defaultData: {
       images: [],
       layout: "masonry"
-    }
+    },
+    Component: GallerySection,
+    SettingsComponent: GallerySettings
   },
   music: {
     type: "music",
@@ -82,7 +96,9 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
       trackUrl: null,
       title: "",
       autoplay: false
-    }
+    },
+    Component: MusicSection,
+    SettingsComponent: MusicSettings
   },
   video: {
     type: "video",
@@ -91,7 +107,9 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     description: "A video player block.",
     defaultData: {
       videoUrl: null
-    }
+    },
+    Component: VideoSection,
+    SettingsComponent: VideoSettings
   },
   voice_message: {
     type: "voice_message",
@@ -100,8 +118,10 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     description: "An intimate voice recording player.",
     defaultData: {
       audioUrl: null,
-      waveform: []
-    }
+      label: "A message from me..."
+    },
+    Component: VoiceSection,
+    SettingsComponent: VoiceSettings
   },
   countdown: {
     type: "countdown",
