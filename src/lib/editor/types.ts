@@ -68,6 +68,7 @@ export interface EditorState {
   // UI Actions
   setDeviceView: (view: DeviceView) => void;
   setIsDragging: (isDragging: boolean) => void;
+  setIsDirty: (isDirty: boolean) => void;
   
   // Reset
   reset: () => void;

@@ -4,15 +4,23 @@ import { ReactNode } from "react"
 import { TopToolbar } from "./top-toolbar"
 import { BottomStatusBar } from "./bottom-status-bar"
 import { LeftSidebar } from "./left-sidebar"
+import dynamic from "next/dynamic"
 import { RightPanel } from "./right-panel"
 import { PreviewCanvas } from "./preview-canvas"
-import { MediaManager } from "@/components/media/media-manager"
+import { ThemeInjector } from "@/components/theme/theme-injector"
+import { useAutosave } from "@/lib/editor/use-autosave"
+
+// Lazy load heavy global modals
+const MediaManager = dynamic(() => import("@/components/media/media-manager").then(mod => mod.MediaManager), { ssr: false })
 
 interface EditorShellProps {
   children?: ReactNode
 }
 
 export function EditorShell({ children }: EditorShellProps) {
+  // Mount autosave watcher
+  useAutosave()
+
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden bg-background text-foreground">
       {/* Top Navigation / Toolbar */}
@@ -37,6 +45,9 @@ export function EditorShell({ children }: EditorShellProps) {
 
       {/* Global Modals */}
       <MediaManager />
+      
+      {/* Dynamic Style Injection for Canvas */}
+      <ThemeInjector />
     </div>
   )
 }

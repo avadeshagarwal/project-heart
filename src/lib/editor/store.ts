@@ -69,6 +69,8 @@ export const useEditorStore = create<EditorState>()(
       setDeviceView: (view) => set({ deviceView: view }),
       
       setIsDragging: (isDragging) => set({ isDragging }),
+      
+      setIsDirty: (isDirty) => set({ isDirty }),
 
       reset: () => set(initialState),
     }),
