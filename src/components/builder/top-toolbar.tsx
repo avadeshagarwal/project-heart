@@ -1,10 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowLeft, Play, Send, CheckCircle2, CircleDashed } from "lucide-react"
+import { ArrowLeft, Play, Send, CheckCircle2, CircleDashed, Image } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { useEditorStore } from "@/lib/editor/store"
+import { useMediaStore } from "@/lib/media/store"
 import { DeviceToolbar } from "./device-toolbar"
 
 export function TopToolbar() {
@@ -45,6 +46,10 @@ export function TopToolbar() {
       </div>
 
       <div className="flex items-center gap-2">
+        <Button variant="outline" size="sm" className="h-8 gap-2" onClick={() => useMediaStore.getState().openManager()}>
+          <Image className="h-3.5 w-3.5" />
+          Media Library
+        </Button>
         <Button variant="outline" size="sm" className="h-8 gap-2">
           <Play className="h-3.5 w-3.5 fill-current" />
           Preview

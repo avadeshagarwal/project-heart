@@ -6,6 +6,7 @@ import { BottomStatusBar } from "./bottom-status-bar"
 import { LeftSidebar } from "./left-sidebar"
 import { RightPanel } from "./right-panel"
 import { PreviewCanvas } from "./preview-canvas"
+import { MediaManager } from "@/components/media/media-manager"
 
 interface EditorShellProps {
   children?: ReactNode
@@ -33,6 +34,9 @@ export function EditorShell({ children }: EditorShellProps) {
 
       {/* Bottom Status Bar */}
       <BottomStatusBar />
+
+      {/* Global Modals */}
+      <MediaManager />
     </div>
   )
 }
