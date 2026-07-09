@@ -1,12 +1,25 @@
 import { Heart, Type, Clock, Image, Music, Video, Mic, Timer, Quote, Minus, MousePointer2, Puzzle, Ticket, Disc, Cake, Grid, Box } from "lucide-react"
 import type { SectionType } from "./types"
 
+import { HeroSection } from "@/components/sections/hero/hero-section"
+import { HeroSettings } from "@/components/sections/hero/hero-settings"
+import { LetterSection } from "@/components/sections/letter/letter-section"
+import { LetterSettings } from "@/components/sections/letter/letter-settings"
+
+import { TimelineSection } from "@/components/sections/timeline/timeline-section"
+import { TimelineSettings } from "@/components/sections/timeline/timeline-settings"
+
+import { CountdownSection } from "@/components/sections/countdown/countdown-section"
+import { CountdownSettings } from "@/components/sections/countdown/countdown-settings"
+
 export interface SectionPlugin {
   type: SectionType
   label: string
   icon: React.ElementType
   description: string
   defaultData: Record<string, any>
+  Component?: React.ComponentType<{ data: any, sectionId: string }>
+  SettingsComponent?: React.ComponentType<{ sectionId: string }>
 }
 
 // The central registry where all future sections register themselves.
@@ -19,9 +32,12 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     defaultData: {
       title: "Happy Birthday",
       subtitle: "To someone special",
+      ctaText: "Scroll to begin",
       align: "center",
       image: null
-    }
+    },
+    Component: HeroSection,
+    SettingsComponent: HeroSettings
   },
   letter: {
     type: "letter",
@@ -30,8 +46,11 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     description: "A beautiful typography-focused text block.",
     defaultData: {
       content: "Write your heartfelt message here...",
+      signature: "With love,",
       fontFamily: "serif"
-    }
+    },
+    Component: LetterSection,
+    SettingsComponent: LetterSettings
   },
   timeline: {
     type: "timeline",
@@ -40,7 +59,9 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     description: "A vertical timeline of memories.",
     defaultData: {
       events: []
-    }
+    },
+    Component: TimelineSection,
+    SettingsComponent: TimelineSettings
   },
   gallery: {
     type: "gallery",
@@ -90,7 +111,9 @@ export const SECTION_REGISTRY: Record<SectionType, SectionPlugin> = {
     defaultData: {
       targetDate: new Date(Date.now() + 86400000).toISOString(),
       label: "Until the big day"
-    }
+    },
+    Component: CountdownSection,
+    SettingsComponent: CountdownSettings
   },
   quote: {
     type: "quote",

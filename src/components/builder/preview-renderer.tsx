@@ -31,16 +31,19 @@ export function PreviewRenderer() {
               isSelected ? "border-primary" : "border-transparent"
             }`}
           >
-            {/* 
-              Phase 5.1/5.4: We are only building the foundation.
-              Actual section rendering logic will be built per-plugin in future phases.
-              For now, we render a placeholder block reflecting the plugin data.
-            */}
-            <div className="flex min-h-[200px] w-full flex-col items-center justify-center bg-muted/10 p-8">
-              <Plugin.icon className="mb-4 h-8 w-8 text-muted-foreground/50" />
-              <h3 className="text-xl font-bold">{section.data.title || section.meta.title || Plugin.label}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{Plugin.description}</p>
-            </div>
+            {Plugin.Component ? (
+              <div className="w-full h-full relative group">
+                <Plugin.Component data={section.data} sectionId={section.meta.id} />
+                {/* Overlay block to prevent accidental clicks inside the iframe/preview hijacking the editor */}
+                <div className="absolute inset-0 z-[99] cursor-pointer" onClick={() => useEditorStore.getState().selectSection(section.meta.id)} />
+              </div>
+            ) : (
+              <div className="flex min-h-[200px] w-full flex-col items-center justify-center bg-muted/10 p-8">
+                <Plugin.icon className="mb-4 h-8 w-8 text-muted-foreground/50" />
+                <h3 className="text-xl font-bold">{section.data.title || section.meta.title || Plugin.label}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{Plugin.description}</p>
+              </div>
+            )}
           </div>
         )
       })}
