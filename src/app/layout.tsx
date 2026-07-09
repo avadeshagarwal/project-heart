@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ToastProvider } from "@/components/ui/toast-provider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,6 +49,7 @@ export default function RootLayout({
     <html lang="en" className={`${fontSans.variable} ${fontSerif.variable} antialiased`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
         {children}
+        <ToastProvider />
       </body>
     </html>
   );
